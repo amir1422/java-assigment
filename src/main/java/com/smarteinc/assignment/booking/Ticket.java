@@ -1,9 +1,14 @@
 package com.smarteinc.assignment.booking;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Ticket {
+public class Ticket implements Validable {
+	private static Set<Integer> validTicketTypes;
+
 	// Only two values are allowed 1 == Bus ticket, 2 == Car ticket
+	private boolean valid;
 	private int type;
 	private String from;
 	private String destination;
@@ -21,6 +26,7 @@ public class Ticket {
 	}
 
 	public void setType(int type) {
+		valid = validTicketTypes.contains(type);
 		this.type = type;
 	}
 
@@ -64,4 +70,14 @@ public class Ticket {
 		this.passenger = passenger;
 	}
 
+	@Override
+	public boolean isValid(Ticket x) {
+		return valid;
+	}
+	static {
+		validTicketTypes = new HashSet<>();
+		//adding valid ticket types.
+		validTicketTypes.add(1);
+		validTicketTypes.add(2);
+	}
 }
