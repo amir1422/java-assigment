@@ -1,13 +1,16 @@
 package com.smarteinc.assignment.booking;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.smarteinc.assignment.booking.service.impl.TicketType;
 
 public class Ticket implements Validable {
-	private static Set<Integer> validTicketTypes;
+	private static Map<Integer, String> validTicketTypes;
 
 	// Only two values are allowed 1 == Bus ticket, 2 == Car ticket
+	private TicketType ticketType;
 	private boolean valid;
 	private int type;
 	private String from;
@@ -26,8 +29,9 @@ public class Ticket implements Validable {
 	}
 
 	public void setType(int type) {
-		valid = validTicketTypes.contains(type);
+		this.valid = validTicketTypes.containsKey(type);
 		this.type = type;
+		this.ticketType = valid ? TicketType.valueOf(validTicketTypes.get(type)) : null;
 	}
 
 	public String getFrom() {
@@ -74,10 +78,15 @@ public class Ticket implements Validable {
 	public boolean isValid(Ticket x) {
 		return valid;
 	}
+
+	public TicketType getTicketType() {
+		return ticketType;
+	}
+
 	static {
-		validTicketTypes = new HashSet<>();
-		//adding valid ticket types.
-		validTicketTypes.add(1);
-		validTicketTypes.add(2);
+		validTicketTypes = new HashMap<>();
+		// adding valid ticket types.
+		validTicketTypes.put(1, "BUS");
+		validTicketTypes.put(2, "CAR");
 	}
 }

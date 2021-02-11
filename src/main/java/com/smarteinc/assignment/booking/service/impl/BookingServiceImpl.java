@@ -6,11 +6,14 @@ import com.smarteinc.assignment.booking.service.BookingService;
 public class BookingServiceImpl implements BookingService {
 
 	@Override
-	public void bookTicket(Ticket x) {
-		if (x.getType() == 1) {
-			bookBusTicket(x);
-		} else {
-			bookCarTicket(x);
+	public void bookTicket(Ticket ticket) {
+		
+		switch (ticket.getTicketType()) {
+		case BUS:
+			bookBusTicket(ticket);
+			break;
+		case CAR:
+			bookCarTicket(ticket);
 		}
 
 	}
@@ -23,5 +26,4 @@ public class BookingServiceImpl implements BookingService {
 		// assume Bus is booked by making some entries in db
 	}
 
-	
 }
