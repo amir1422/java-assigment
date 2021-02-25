@@ -15,7 +15,7 @@ public class ValidatorUtil {
 		Objects.requireNonNull(ticket.getDestination());
 		Objects.requireNonNull(ticket.getPassenger());
 
-		
+		//added comments 1
 	}
 
 }
